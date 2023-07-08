@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SlotTape : MonoBehaviour
 {
     [SerializeField] List<SlotView> _slots;
     [SerializeField] Transform _startPoint;
     [SerializeField] Transform _endPoint;
+    [SerializeField] Transform _fadeInPoint;
+    [SerializeField] Transform _fadeOutPoint;
     [SerializeField] float _maxSpeed;
     [SerializeField] float _minSpeed;
     [SerializeField] float _changeSpeedMultiplier;
@@ -16,7 +19,8 @@ public class SlotTape : MonoBehaviour
     private float _speed;
     private bool _isPlaying;
 
-    public Slot CurrentSlot { get; private set; }
+    public event UnityAction<Slot> Choosen;
+
     public bool IsAvtive { get; private set; }
 
     private void Awake()
@@ -44,11 +48,8 @@ public class SlotTape : MonoBehaviour
 
         if (hit.collider.TryGetComponent(out SlotView slot))
         {
-            CurrentSlot = slot.CurrentSlot;
+            Choosen?.Invoke(slot.CurrentSlot);
             _isPlaying = false;
-
-            Debug.Log(CurrentSlot.Value);
-
             StartCoroutine(Choice(slot.transform));
         }
     }
@@ -64,6 +65,10 @@ public class SlotTape : MonoBehaviour
                     slot.transform.position = 
                         _startPoint.position - (_endPoint.transform.position - slot.transform.position);
                     slot.Init();
+                }
+                if (slot.transform.position.y <= _fadeOutPoint.position.y)
+                {
+                    //slot.Sprite.color.a = _fadeOutPoint.position.y - _endPoint.position.y;
                 }
 
                 slot.transform.position = Vector3.MoveTowards(

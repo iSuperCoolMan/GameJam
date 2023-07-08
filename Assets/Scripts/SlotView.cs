@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class SlotView : MonoBehaviour
 {
     [SerializeField] private List<Slot> _slots;
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private SpriteRenderer _sprite;
 
     private int _biggestSlotValue;
-    private Rigidbody2D _rigidbody;
 
     public Slot CurrentSlot { get; private set; }
+    public SpriteRenderer Sprite { get; private set; }
 
     private void Awake()
     {
@@ -33,11 +33,6 @@ public class SlotView : MonoBehaviour
     {
         Init();
     }
-
-    //public void Move(Vector2 direction)
-    //{
-    //    _rigidbody.velocity = direction;
-    //}
 
     public void Init()
     {
