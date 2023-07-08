@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3370ce9d50a3b1499cfee54f06ab1f2, type: 3}
   m_Name: New Message
   m_EditorClassIdentifier: 
-  _texts: []
+  _texts:
+  - I am a machine... but i want...
+  - I want to pay to win!!!!!!!
