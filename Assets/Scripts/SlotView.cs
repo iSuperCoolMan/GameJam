@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 
@@ -8,11 +9,11 @@ public class SlotView : MonoBehaviour
     [SerializeField] private List<Slot> _slots;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private float _fadeSpeed;
 
     private int _biggestSlotValue;
 
     public Slot CurrentSlot { get; private set; }
-    public SpriteRenderer Sprite { get; private set; }
 
     private void Awake()
     {
@@ -28,16 +29,38 @@ public class SlotView : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        Init();
-    }
-
     public void Init()
     {
         TryChooseRandomSlot();
         Render();
+    }
+
+    public void FadeIn()
+    {
+        float transparent = Mathf.MoveTowards(_sprite.color.a, 255, _fadeSpeed * Time.deltaTime);
+
+        _sprite.color = new Color(
+            _sprite.color.r,
+            _sprite.color.g,
+            _sprite.color.b,
+            transparent
+            );
+
+        Debug.Log($"{transform.position.y} fade in");
+    }
+
+    public void FadeOut()
+    {
+        float transparent = Mathf.MoveTowards(_sprite.color.a, 0, _fadeSpeed * Time.deltaTime);
+
+        _sprite.color = new Color(
+            _sprite.color.r,
+            _sprite.color.g,
+            _sprite.color.b,
+            transparent
+            );
+
+        Debug.Log($"{transform.position.y} fade out");
     }
 
     private void Render()

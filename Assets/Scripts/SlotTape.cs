@@ -66,10 +66,6 @@ public class SlotTape : MonoBehaviour
                         _startPoint.position - (_endPoint.transform.position - slot.transform.position);
                     slot.Init();
                 }
-                if (slot.transform.position.y <= _fadeOutPoint.position.y)
-                {
-                    //slot.Sprite.color.a = _fadeOutPoint.position.y - _endPoint.position.y;
-                }
 
                 slot.transform.position = Vector3.MoveTowards(
                     slot.transform.position,
