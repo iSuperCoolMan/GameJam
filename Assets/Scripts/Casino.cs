@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class Casino : MonoBehaviour
 {
     [SerializeField] Game _game;
+    [SerializeField] GameOverPanel _leavePanel;
+    [SerializeField] GameOverPanel _offPanel;
     [SerializeField] private float _suspicionChangeByWin = 0.075f, _suspicionChangeByLose = 0.1f;
     [SerializeField] private int _coins = 100;
 
@@ -62,9 +64,9 @@ public class Casino : MonoBehaviour
         SuspicionChanged?.Invoke(_suspicionValue);
 
         if (_suspicionValue < 0)
-            Debug.Log("Игрок ушёл");
+            _leavePanel.gameObject.SetActive(true);
         else if (_suspicionValue > 1f)
-            Debug.Log("Вас выключили");
+            _offPanel.gameObject.SetActive(true);
     }
 
     private void callSecurity()
