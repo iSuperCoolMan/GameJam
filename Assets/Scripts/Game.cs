@@ -6,13 +6,18 @@ using UnityEngine.Events;
 public class Game : MonoBehaviour
 {
     [SerializeField] private TextField _textField;
+    [SerializeField] private AudioSource _winSound;
+    [SerializeField] private AudioSource _topUpSound;
     [SerializeField] private List<SlotTape> _tapes;
     [SerializeField] private uint _price;
     [SerializeField] private float _startRoundDelay;
+    [SerializeField] private float _startRollTapesDelay;
 
-    private List<Slot> _choosenSlots;
+    private Slot[] _choosenSlots;
     private int _index;
-    private WaitForSeconds _wait;
+    private WaitForSeconds _waitStartRound;
+    private WaitForSeconds _waitStartRoll;
+    private WaitForSeconds _waitWin;
     private event UnityAction SlotsChoosen;
 
     public event UnityAction<uint> Started;
@@ -23,8 +28,9 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         _index = 0;
-        _wait = new WaitForSeconds(_startRoundDelay);
-        _choosenSlots = new List<Slot>();
+        _waitStartRound = new WaitForSeconds(_startRoundDelay);
+        _waitStartRoll = new WaitForSeconds(_startRollTapesDelay);
+        _choosenSlots = new Slot[_tapes.Count];
     }
 
     private void OnEnable()
@@ -58,26 +64,35 @@ public class Game : MonoBehaviour
             {
                 _tapes[_index].Stop();
                 ChangeIndex();
-                _tapes[_index].Active();
+
+                if (_index != 0)
+                    _tapes[_index].Active();
             }
         }
     }
 
     private void AddChoosenSlot(Slot slot)
     {
-        _choosenSlots.Add(slot);
+        _choosenSlots[_index] = slot;
     }
 
     private IEnumerator RunCoroutine()
     {
-        yield return _wait;
+        yield return _waitStartRound;
+        yield return _waitWin;
+        _topUpSound.Play();
+        yield return _waitStartRound;
 
         foreach (SlotTape tape in _tapes)
+        {
+            yield return _waitStartRoll;
             tape.Play();
+        }
 
         Started?.Invoke(_price);
-        yield return _wait;
         _tapes[_index].Active();
+
+        _waitWin = null;
     }
 
     private void Run()
@@ -87,7 +102,7 @@ public class Game : MonoBehaviour
 
     private void ChangeIndex()
     {
-        _index = _choosenSlots.Count;
+        _index++;
 
         if (_index >= _tapes.Count)
         {
@@ -101,13 +116,17 @@ public class Game : MonoBehaviour
         uint reward = 0;
         bool valuesEquals = true;
 
-        for (int i = 1; i < _choosenSlots.Count; i++)
+        for (int i = 1; i < _choosenSlots.Length; i++)
             valuesEquals = valuesEquals && _choosenSlots[i - 1].Value == _choosenSlots[i].Value;
 
         if (valuesEquals)
+        {
             reward = _choosenSlots[0].Value;
+            _winSound.Play();
+            _waitWin = new WaitForSeconds(_startRoundDelay);
+        }
 
-        _choosenSlots.Clear();
+        _choosenSlots = new Slot[_tapes.Count];
         _textField.TryOpen(reward);
         RewardCalculated?.Invoke(reward);
     }

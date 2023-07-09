@@ -10,13 +10,18 @@ public class SlotView : MonoBehaviour
     [SerializeField] private TMP_Text _text;
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private float _fadeSpeed;
+    [SerializeField] private float _changeSizeSpeed;
 
     private int _biggestSlotValue;
+    private Vector3 _startSize;
+    private Coroutine _changeSize;
 
     public Slot CurrentSlot { get; private set; }
 
     private void Awake()
     {
+        _startSize = _sprite.transform.localScale;
+
         if (_slots.Count == 0)
             return;
 
@@ -35,33 +40,54 @@ public class SlotView : MonoBehaviour
         Render();
     }
 
-    public void FadeIn()
+    public void ChangeSize(float sizeMultiplier)
     {
-        float transparent = Mathf.MoveTowards(_sprite.color.a, 255, _fadeSpeed * Time.deltaTime);
+        if (_changeSize != null)
+            StopCoroutine(_changeSize);
 
-        _sprite.color = new Color(
-            _sprite.color.r,
-            _sprite.color.g,
-            _sprite.color.b,
-            transparent
-            );
-
-        Debug.Log($"{transform.position.y} fade in");
+        _changeSize = StartCoroutine(ChangeSizeCoroutine(sizeMultiplier));
     }
 
-    public void FadeOut()
+    private IEnumerator ChangeSizeCoroutine(float sizeMultiplier)
     {
-        float transparent = Mathf.MoveTowards(_sprite.color.a, 0, _fadeSpeed * Time.deltaTime);
+        while (_sprite.transform.localScale != _startSize * sizeMultiplier) 
+        {
+            _sprite.transform.localScale = Vector3.MoveTowards(
+                _sprite.transform.localScale,
+                _startSize * sizeMultiplier,
+                _changeSizeSpeed * Time.deltaTime);
 
-        _sprite.color = new Color(
-            _sprite.color.r,
-            _sprite.color.g,
-            _sprite.color.b,
-            transparent
-            );
-
-        Debug.Log($"{transform.position.y} fade out");
+            yield return null;
+        }
     }
+
+    //public void FadeIn()
+    //{
+    //    float transparent = Mathf.MoveTowards(_sprite.color.a, 255, _fadeSpeed * Time.deltaTime);
+
+    //    _sprite.color = new Color(
+    //        _sprite.color.r,
+    //        _sprite.color.g,
+    //        _sprite.color.b,
+    //        transparent
+    //        );
+
+    //    Debug.Log($"{transform.position.y} fade in");
+    //}
+
+    //public void FadeOut()
+    //{
+    //    float transparent = Mathf.MoveTowards(_sprite.color.a, 0, _fadeSpeed * Time.deltaTime);
+
+    //    _sprite.color = new Color(
+    //        _sprite.color.r,
+    //        _sprite.color.g,
+    //        _sprite.color.b,
+    //        transparent
+    //        );
+
+    //    Debug.Log($"{transform.position.y} fade out");
+    //}
 
     private void Render()
     {

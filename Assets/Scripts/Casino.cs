@@ -5,8 +5,12 @@ using UnityEngine.Events;
 public class Casino : MonoBehaviour
 {
     [SerializeField] Game _game;
-    [SerializeField] GameOverPanel _leavePanel;
-    [SerializeField] GameOverPanel _offPanel;
+    [SerializeField] GamePanel _leavePanel;
+    [SerializeField] GamePanel _offPanel;
+    [SerializeField] GamePanel _winPanel;
+    //[SerializeField] private AudioSource _winSound;
+    //[SerializeField] private AudioSource _leaveSound;
+    //[SerializeField] private AudioSource _offSound;
     [SerializeField] private float _suspicionChangeByWin = 0.075f, _suspicionChangeByLose = 0.1f;
     [SerializeField] private int _coins = 100;
 
@@ -96,7 +100,7 @@ public class Casino : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log("Win");
+        _winPanel.gameObject.SetActive(true);
     }
 
     //private void Lose()

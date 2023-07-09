@@ -10,10 +10,14 @@ public class SlotTape : MonoBehaviour
     [SerializeField] Transform _endPoint;
     [SerializeField] Transform _fadeInPoint;
     [SerializeField] Transform _fadeOutPoint;
+    [SerializeField] AudioSource _rollSound;
+    [SerializeField] AudioSource _stopSound;
     [SerializeField] float _maxSpeed;
     [SerializeField] float _minSpeed;
     [SerializeField] float _changeSpeedMultiplier;
+    [SerializeField] float _sizeMultiplier;
     [SerializeField] float _choiceSpeed;
+    [SerializeField] bool _isPitchable;
 
     private WaitForEndOfFrame _waitForEndOfFrame;
     private float _speed;
@@ -30,27 +34,38 @@ public class SlotTape : MonoBehaviour
 
     public void Play()
     {
+        _rollSound.Play();
         _speed = _maxSpeed;
+        _rollSound.pitch = 1f;
         _isPlaying = true;
         StartCoroutine(Spin());
     }
 
     public void Active()
     {
+        foreach (var slot in _slots)
+            slot.ChangeSize(_sizeMultiplier);
+
         IsAvtive = true;
         StartCoroutine(ChangeCurrentSpeed());
     }
 
     public void Stop()
     {
+        _rollSound.Stop();
+        _stopSound.Play();
+
+        foreach (var slot in _slots)
+            slot.ChangeSize(1);
+
         IsAvtive = false;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward);
 
-        if (hit.collider.TryGetComponent(out SlotView slot))
+        if (hit.collider.TryGetComponent(out SlotView currentSlot))
         {
-            Choosen?.Invoke(slot.CurrentSlot);
+            Choosen?.Invoke(currentSlot.CurrentSlot);
             _isPlaying = false;
-            StartCoroutine(Choice(slot.transform));
+            StartCoroutine(Choice(currentSlot.transform));
         }
     }
 
@@ -101,6 +116,10 @@ public class SlotTape : MonoBehaviour
         while (_speed > _minSpeed && IsAvtive)
         {
             _speed = Mathf.MoveTowards(_speed, _minSpeed, _changeSpeedMultiplier * _maxSpeed / _minSpeed * Time.deltaTime);
+
+            if (_isPitchable)
+                _rollSound.pitch = Mathf.Sqrt(Mathf.Sqrt(_speed /_maxSpeed));
+
             yield return _waitForEndOfFrame;
         }
     }

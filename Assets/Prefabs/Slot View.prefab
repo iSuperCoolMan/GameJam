@@ -139,6 +139,7 @@ MonoBehaviour:
   _text: {fileID: 4858430534673349182}
   _sprite: {fileID: 1586014994025264154}
   _fadeSpeed: 10
+  _changeSizeSpeed: 0.5
 --- !u!61 &8265365850163650299
 BoxCollider2D:
   m_ObjectHideFlags: 0
