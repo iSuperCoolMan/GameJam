@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbbe5324af5ae44d83db954ee355cad, type: 3}
   m_Name: Very big
   m_EditorClassIdentifier: 
-  _text: 8
+  _sprite: {fileID: 21300000, guid: 6697dd6773810b843be7d8091cffb7c5, type: 3}
   _value: 8

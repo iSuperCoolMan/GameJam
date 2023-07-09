@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbbe5324af5ae44d83db954ee355cad, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
-  _text: 4
+  _sprite: {fileID: 21300000, guid: 95bcdf8956f99cb42b2d6bed24a2aad4, type: 3}
   _value: 4
