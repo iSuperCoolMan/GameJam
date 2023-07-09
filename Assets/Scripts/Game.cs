@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _textField.gameObject.activeSelf == false)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_tapes[_index].IsAvtive)
             {

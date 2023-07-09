@@ -16,6 +16,7 @@ public class SlotTape : MonoBehaviour
     [SerializeField] float _minSpeed;
     [SerializeField] float _changeSpeedMultiplier;
     [SerializeField] float _sizeMultiplier;
+    [SerializeField] float _rotateSpeed;
     [SerializeField] float _choiceSpeed;
     [SerializeField] bool _isPitchable;
 
@@ -30,6 +31,27 @@ public class SlotTape : MonoBehaviour
     private void Awake()
     {
         _waitForEndOfFrame = new WaitForEndOfFrame();
+    }
+
+    private void Update()
+    {
+        foreach (var slot in _slots)
+        {
+            if (slot.transform.position.y > transform.position.y)
+            {
+                slot.ChangeRotation(new Quaternion(
+                    (transform.position.y + slot.transform.position.y) / _startPoint.transform.position.y, 0, 0, 1
+                    )
+                );
+            }
+            if (slot.transform.position.y < transform.position.y)
+            {
+                slot.ChangeRotation(new Quaternion(
+                    (transform.position.y + slot.transform.position.y) / _endPoint.position.y, 0, 0, 1
+                    )
+                );
+            }
+        }
     }
 
     public void Play()
@@ -79,14 +101,21 @@ public class SlotTape : MonoBehaviour
                 {
                     slot.transform.position = 
                         _startPoint.position - (_endPoint.transform.position - slot.transform.position);
+                    slot.ChangeRotation(new Quaternion(1, 0, 0, 1));
                     slot.Init();
                 }
 
                 slot.transform.position = Vector3.MoveTowards(
                     slot.transform.position,
-                    _endPoint.position + new Vector3(0, -1, 0),
+                    _endPoint.position,
                     _speed * Time.deltaTime
                     );
+
+                //slot.transform.rotation = Quaternion.RotateTowards(
+                //    slot.transform.rotation,
+                //    new Quaternion(-45, 0, 0, 0),
+                //    _speed * Time.deltaTime
+                    //);
             }
 
             yield return null;

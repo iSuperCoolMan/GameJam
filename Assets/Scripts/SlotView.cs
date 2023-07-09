@@ -34,6 +34,11 @@ public class SlotView : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Init();
+    }
+
     public void Init()
     {
         TryChooseRandomSlot();
@@ -46,6 +51,11 @@ public class SlotView : MonoBehaviour
             StopCoroutine(_changeSize);
 
         _changeSize = StartCoroutine(ChangeSizeCoroutine(sizeMultiplier));
+    }
+
+    public void ChangeRotation(Quaternion rotation)
+    {
+        _sprite.transform.rotation = rotation;
     }
 
     private IEnumerator ChangeSizeCoroutine(float sizeMultiplier)

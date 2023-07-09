@@ -1910,6 +1910,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
+      propertyPath: _rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       propertyPath: _sizeMultiplier
       value: 1.05
       objectReference: {fileID: 0}
@@ -1976,12 +1980,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6790823650759141178, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6097193132304165303, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 1856735738635971297, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
@@ -2981,6 +2979,7 @@ MonoBehaviour:
   _text: {fileID: 977791775}
   _rewardMessages:
   - {fileID: 11400000, guid: 5b5e2f3840212b24b805f9348388937a, type: 2}
+  _waitTime: 0
 --- !u!1 &1976983906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3134,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
+      propertyPath: _rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       propertyPath: _sizeMultiplier
       value: 1.05
       objectReference: {fileID: 0}
@@ -3203,12 +3206,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6790823650759141178, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6097193132304165303, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 1856735738635971297, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
 --- !u!1001 &749423188173824086
 PrefabInstance:
@@ -3225,6 +3222,10 @@ PrefabInstance:
     - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       propertyPath: _minSpeed
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
+      propertyPath: _rotateSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1605488847895122378, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       propertyPath: _sizeMultiplier
@@ -3293,12 +3294,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6790823650759141178, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6097193132304165303, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 1856735738635971297, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2dc6491b18e3fca4482cc086362653b9, type: 3}
