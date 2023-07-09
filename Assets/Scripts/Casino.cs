@@ -8,9 +8,6 @@ public class Casino : MonoBehaviour
     [SerializeField] GamePanel _leavePanel;
     [SerializeField] GamePanel _offPanel;
     [SerializeField] GamePanel _winPanel;
-    //[SerializeField] private AudioSource _winSound;
-    //[SerializeField] private AudioSource _leaveSound;
-    //[SerializeField] private AudioSource _offSound;
     [SerializeField] private float _suspicionChangeByWin = 0.075f, _suspicionChangeByLose = 0.1f;
     [SerializeField] private int _coins = 100;
 

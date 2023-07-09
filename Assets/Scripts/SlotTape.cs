@@ -37,17 +37,17 @@ public class SlotTape : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            if (slot.transform.position.y > transform.position.y)
+            if (slot.transform.localPosition.y > transform.localPosition.y)
             {
                 slot.ChangeRotation(new Quaternion(
-                    (transform.position.y + slot.transform.position.y) / _startPoint.transform.position.y, 0, 0, 1
+                    (transform.localPosition.y + slot.transform.localPosition.y) / _startPoint.localPosition.y, 0, 0, 1
                     )
                 );
             }
-            if (slot.transform.position.y < transform.position.y)
+            if (slot.transform.localPosition.y < transform.localPosition.y)
             {
                 slot.ChangeRotation(new Quaternion(
-                    (transform.position.y + slot.transform.position.y) / _endPoint.position.y, 0, 0, 1
+                    (transform.localPosition.y + slot.transform.localPosition.y) / _endPoint.localPosition.y, 0, 0, 1
                     )
                 );
             }

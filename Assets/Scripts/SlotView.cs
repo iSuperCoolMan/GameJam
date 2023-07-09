@@ -7,8 +7,8 @@ using UnityEngine;
 public class SlotView : MonoBehaviour
 {
     [SerializeField] private List<Slot> _slots;
-    [SerializeField] private TMP_Text _text;
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private SpriteRenderer _backround;
     [SerializeField] private float _fadeSpeed;
     [SerializeField] private float _changeSizeSpeed;
 
@@ -56,6 +56,7 @@ public class SlotView : MonoBehaviour
     public void ChangeRotation(Quaternion rotation)
     {
         _sprite.transform.rotation = rotation;
+        _backround.transform.rotation = rotation;
     }
 
     private IEnumerator ChangeSizeCoroutine(float sizeMultiplier)
@@ -101,7 +102,7 @@ public class SlotView : MonoBehaviour
 
     private void Render()
     {
-        _text.text = CurrentSlot.Text;
+        _sprite.sprite = CurrentSlot.Sprite;
     }
 
     private void TryChooseRandomSlot()
