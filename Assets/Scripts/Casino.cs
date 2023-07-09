@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Casino : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class Casino : MonoBehaviour
     {
         SuspicionChanged?.Invoke(_suspicionValue);
         MoneyChanged?.Invoke(_coins);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GetRollResult(uint coinsChange)

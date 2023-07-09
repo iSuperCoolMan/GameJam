@@ -20,6 +20,9 @@ public class MoneyCounter : MonoBehaviour
 
     private void ChangeMoney(int money)
     {
+        if (money < 0)
+            money = 0;
+
         _text.text = money.ToString();
     }
 }

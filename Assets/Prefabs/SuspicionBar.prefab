@@ -30,8 +30,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6017172912554332820}
   - {fileID: 579043351379257819}
+  - {fileID: 6017172912554332820}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _casino: {fileID: 0}
   _slider: {fileID: 4521245913316576590}
+  _player: {fileID: 0}
 --- !u!1 &4123205856283504397
 GameObject:
   m_ObjectHideFlags: 0

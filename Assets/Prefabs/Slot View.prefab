@@ -134,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slots:
   - {fileID: 11400000, guid: 869ff87e52eb8a041b8e77d6d9f90982, type: 2}
-  - {fileID: 11400000, guid: ec2ddf4ad78a6aa4d8ee3345bbf751eb, type: 2}
   - {fileID: 11400000, guid: e0e50a637790d0a43b03a0f08196cd29, type: 2}
   - {fileID: 11400000, guid: 281a6742e33e95f4aa7584eac38660c0, type: 2}
   - {fileID: 11400000, guid: 820bd7ed5292f7b4cae4a29668d6bd88, type: 2}
